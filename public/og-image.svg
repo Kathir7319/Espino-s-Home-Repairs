@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1E33" />
+      <stop offset="100%" stop-color="#1B3557" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#E28723" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="1050" cy="150" r="300" fill="#E28723" opacity="0.08" />
+  <circle cx="150" cy="500" r="250" fill="#2563EB" opacity="0.05" />
+
+  <!-- Badge -->
+  <g transform="translate(100, 100)">
+    <rect width="360" height="42" rx="21" fill="#E28723" opacity="0.2" />
+    <circle cx="24" cy="21" r="6" fill="#16A34A" />
+    <text x="42" y="27" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="16" fill="#F59E0B" letter-spacing="1.5">FUQUAY-VARINA, NC HANDYMAN</text>
+  </g>
+
+  <!-- Title -->
+  <text x="100" y="230" font-family="'Outfit', system-ui, sans-serif" font-weight="800" font-size="64" fill="#FFFFFF">Espino's Home Repairs</text>
+  
+  <text x="100" y="300" font-family="'Outfit', system-ui, sans-serif" font-weight="600" font-size="34" fill="#E28723">Fuquay-Varina's Trusted Word-of-Mouth Handyman</text>
+
+  <text x="100" y="370" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="400" font-size="24" fill="#94A3B8">Drywall Repair • Doors &amp; Windows • Trim &amp; Carpentry • Interior Painting • Minor Plumbing</text>
+
+  <!-- CTA Box -->
+  <g transform="translate(100, 440)">
+    <rect width="440" height="70" rx="14" fill="url(#amberGrad)" />
+    <text x="40" y="44" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF">Request a Quick Photo Quote →</text>
+  </g>
+
+  <g transform="translate(580, 440)">
+    <rect width="320" height="70" rx="14" fill="#1E293B" stroke="#334155" stroke-width="2" />
+    <text x="36" y="44" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="22" fill="#E2E8F0">Call: (919) 555-0184</text>
+  </g>
+</svg>
