@@ -26,7 +26,7 @@ export default function ServiceCard({ service, detailed = false }) {
   return (
     <div 
       id={service.id}
-      className="bg-white rounded-2xl border border-slate-200 shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col group scroll-mt-28"
+      className="bg-white rounded-2xl border border-slate-200 shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col h-full group scroll-mt-28"
     >
       {/* Image Banner */}
       <div className="relative h-48 overflow-hidden bg-slate-100">

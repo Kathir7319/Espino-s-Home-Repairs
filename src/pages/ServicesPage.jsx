@@ -56,10 +56,10 @@ export default function ServicesPage() {
               id={s.id}
               className="bg-white rounded-3xl border border-slate-200 shadow-card overflow-hidden scroll-mt-28"
             >
-              <div className={`grid grid-cols-1 lg:grid-cols-12 items-stretch ${isEven ? 'lg:flex-row-reverse' : ''}`}>
+              <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
                 
                 {/* Visual Image Column */}
-                <div className={`lg:col-span-5 relative min-h-[260px] lg:min-h-full ${isEven ? 'lg:order-2' : ''}`}>
+                <div className={`lg:col-span-5 relative min-h-[260px] lg:min-h-full ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                   <img
                     src={s.image}
                     alt={s.title}
@@ -83,7 +83,7 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Content Column */}
-                <div className={`lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between ${isEven ? 'lg:order-1' : ''}`}>
+                <div className={`lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
                   <div>
                     {/* Tagline from spec */}
                     <div className="inline-block px-3 py-1 bg-amber-50 text-brand-amber font-semibold text-xs rounded-lg mb-3">

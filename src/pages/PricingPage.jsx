@@ -40,7 +40,7 @@ export default function PricingPage() {
           {PRICING_RATES.map((pkg) => (
             <div
               key={pkg.id}
-              className={`rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 relative ${
+              className={`rounded-3xl p-8 flex flex-col justify-between h-full transition-all duration-300 relative ${
                 pkg.popular
                   ? 'bg-white border-2 border-brand-amber shadow-2xl scale-100 md:-translate-y-2'
                   : 'bg-white border border-slate-200 shadow-card'
@@ -139,7 +139,7 @@ export default function PricingPage() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs sm:text-sm">
+            <table className="w-full text-left text-xs sm:text-sm min-w-[620px]">
               <thead className="bg-slate-100/70 border-b border-slate-200 text-slate-700 font-bold">
                 <tr>
                   <th className="p-4">Package Scope</th>

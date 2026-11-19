@@ -101,24 +101,24 @@ export default function RateCalculator() {
       </div>
 
       {/* Estimate Outcome Box */}
-      <div className="bg-gradient-to-br from-brand-navy to-brand-navy-light rounded-2xl p-6 text-white flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
+      <div className="bg-gradient-to-br from-brand-navy to-brand-navy-light rounded-2xl p-6 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-lg">
+        <div className="text-left">
           <div className="text-xs uppercase tracking-wider font-semibold text-brand-amber mb-1 flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" /> Recommended Solution:
           </div>
           <div className="font-heading font-extrabold text-xl sm:text-2xl text-white">
             {recommendedPackage}
           </div>
-          <div className="text-xs text-slate-300 mt-1 flex items-center gap-2">
+          <div className="text-xs text-slate-300 mt-1 flex flex-wrap items-center gap-2">
             <span>Estimated labor: <strong>~{totalHours.toFixed(1)} Hours</strong></span>
             <span>•</span>
             <span className="text-emerald-400 font-medium">{savings}</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 shrink-0">
-          <div className="text-right">
-            <div className="text-xs text-slate-400">Est. Labor Total</div>
+        <div className="flex items-center justify-between w-full md:w-auto gap-5 shrink-0 pt-3 md:pt-0 border-t border-white/10 md:border-0">
+          <div className="text-left md:text-right">
+            <div className="text-xs text-slate-400 font-medium">Est. Labor Total</div>
             <div className="font-heading font-extrabold text-3xl text-brand-amber">
               ${estimatedCost}
             </div>
@@ -126,7 +126,7 @@ export default function RateCalculator() {
 
           <Link
             to="/quote"
-            className="px-5 py-3 rounded-xl font-heading font-bold text-sm bg-brand-amber hover:bg-brand-amber-hover text-white shadow-cta transition-all flex items-center gap-1.5"
+            className="px-5 py-3 rounded-xl font-heading font-bold text-sm bg-brand-amber hover:bg-brand-amber-hover text-white shadow-cta hover:shadow-lg transition-all flex items-center gap-1.5 shrink-0 active:scale-[0.98]"
           >
             <span>Lock In Quote</span>
             <ArrowRight className="w-4 h-4" />

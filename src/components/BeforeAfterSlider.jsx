@@ -14,7 +14,7 @@ export default function BeforeAfterSlider({ item }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-card flex flex-col">
+    <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-card flex flex-col h-full">
       {/* Slider Viewport */}
       <div
         className="relative h-64 sm:h-72 w-full select-none overflow-hidden cursor-ew-resize bg-slate-100"

@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Phone, MessageSquare, Camera, Menu, X, ShieldCheck, MapPin, Clock } from 'lucide-react';
+import { 
+  Phone, 
+  MessageSquare, 
+  Camera, 
+  Menu, 
+  X, 
+  ShieldCheck, 
+  MapPin, 
+  Clock,
+  Home,
+  Wrench,
+  DollarSign,
+  Sparkles,
+  Users,
+  ChevronRight
+} from 'lucide-react';
 import Logo from './Logo';
 import { BUSINESS_INFO } from '../data/content';
 
@@ -9,182 +24,240 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  // Close mobile drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
-  }, [location]);
+  }, [location.pathname]);
 
+  // Handle scroll shadow and sticky styling
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'Rates & Packages', path: '/pricing' },
-    { name: 'Get Photo Quote', path: '/quote', highlight: true },
-    { name: 'Before & After', path: '/gallery' },
-    { name: 'Our Story', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Home', path: '/', icon: Home },
+    { name: 'Services', path: '/services', icon: Wrench },
+    { name: 'Rates & Packages', path: '/pricing', icon: DollarSign },
+    { name: 'Photo Quote', path: '/quote', icon: Camera, highlight: true },
+    { name: 'Before & After', path: '/gallery', icon: Sparkles },
+    { name: 'Our Story', path: '/about', icon: Users },
+    { name: 'Contact', path: '/contact', icon: Phone },
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full transition-all duration-200">
-      {/* Top Notification Bar (Local Fuquay-Varina announcement) */}
-      <div className="bg-brand-navy-dark text-slate-300 text-xs py-1.5 px-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1 text-brand-amber font-semibold">
-              <MapPin className="w-3.5 h-3.5" />
-              Serving Fuquay-Varina &amp; South Wake County, NC
+    <header className="sticky top-0 z-40 w-full font-sans transition-all duration-200">
+      
+      {/* 1. TOP UTILITY ANNOUNCEMENT BAR */}
+      <div className="bg-brand-navy-dark text-slate-300 text-xs py-2 px-4 border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          
+          {/* Left: Location & Local Trust */}
+          <div className="flex items-center gap-2 truncate">
+            <span className="flex items-center gap-1.5 text-brand-amber font-semibold text-[11px] sm:text-xs">
+              <MapPin className="w-3.5 h-3.5 text-brand-amber shrink-0" />
+              <span>Fuquay-Varina &amp; South Wake County, NC</span>
             </span>
-            <span className="hidden sm:inline text-slate-500">•</span>
-            <span className="hidden sm:inline text-slate-300">Direct Neighbor Referrals &amp; Upfront Pricing</span>
-          </div>
-          <div className="flex items-center gap-4 text-[11px]">
-            <span className="hidden md:flex items-center gap-1 text-slate-300">
-              <Clock className="w-3 h-3 text-slate-400" /> Mon–Sat: 7:30 AM – 6:00 PM
-            </span>
-            <span className="flex items-center gap-1 text-emerald-400 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5" /> 1-Year Craftsmanship Guarantee
+            <span className="hidden md:inline text-slate-600">•</span>
+            <span className="hidden md:inline text-slate-300 text-xs">
+              Direct Neighbor Referrals &amp; Upfront Pricing
             </span>
           </div>
+
+          {/* Right: Guarantee & Hours */}
+          <div className="flex items-center gap-4 text-[11px] sm:text-xs shrink-0">
+            <span className="hidden lg:flex items-center gap-1.5 text-slate-300">
+              <Clock className="w-3.5 h-3.5 text-slate-400" />
+              <span>Mon–Sat: 7:30 AM – 6:00 PM</span>
+            </span>
+            <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span>1-Year Labor Guarantee</span>
+            </span>
+          </div>
+
         </div>
       </div>
 
-      {/* Main Navbar */}
-      <nav className={`w-full bg-white transition-all duration-200 ${scrolled ? 'shadow-md py-2.5' : 'border-b border-slate-200 py-3.5'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          
-          {/* Logo */}
-          <Link to="/" className="group focus:outline-none focus:ring-2 focus:ring-brand-amber rounded-lg">
-            <Logo variant="horizontal" />
-          </Link>
-
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                    isActive
-                      ? 'text-brand-amber bg-amber-50 font-bold'
-                      : link.highlight
-                      ? 'text-brand-navy bg-slate-100 hover:bg-slate-200 font-bold'
-                      : 'text-slate-700 hover:text-brand-navy hover:bg-slate-50'
-                  }`
-                }
-              >
-                {link.name}
-              </NavLink>
-            ))}
-          </div>
-
-          {/* CTA Buttons - As specified in the spec */}
-          <div className="hidden md:flex items-center gap-2 xl:gap-3">
-            {/* Primary CTA Button: Call: [Insert Phone Number] */}
-            <a
-              href={`tel:${BUSINESS_INFO.phoneRaw}`}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs xl:text-sm font-bold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition-all active:scale-[0.98]"
-              title={`Call ${BUSINESS_INFO.name}`}
+      {/* 2. MAIN NAVIGATION BAR */}
+      <nav 
+        className={`w-full bg-white/95 backdrop-blur-md transition-all duration-300 ${
+          scrolled 
+            ? 'shadow-lg border-b border-slate-200/90 py-2.5' 
+            : 'border-b border-slate-200 py-3.5'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-4">
+            
+            {/* Logo */}
+            <Link 
+              to="/" 
+              className="shrink-0 group focus:outline-none focus:ring-2 focus:ring-brand-amber rounded-xl p-0.5"
+              aria-label="Espino's Home Repairs Homepage"
             >
-              <Phone className="w-3.5 h-3.5 fill-current shrink-0" />
-              <span>Call: {BUSINESS_INFO.phone}</span>
-            </a>
-
-            {/* Secondary CTA Button: Text: [Insert Phone Number] */}
-            <a
-              href={`sms:${BUSINESS_INFO.phoneRaw}?&body=${encodeURIComponent(BUSINESS_INFO.smsPrompt)}`}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs xl:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-all active:scale-[0.98]"
-              title={`Text ${BUSINESS_INFO.name}`}
-            >
-              <MessageSquare className="w-3.5 h-3.5 fill-current shrink-0" />
-              <span>Text: {BUSINESS_INFO.phone}</span>
-            </a>
-
-            {/* Get Photo Quote Button */}
-            <Link
-              to="/quote"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs xl:text-sm font-bold bg-brand-amber hover:bg-brand-amber-hover text-white shadow-cta transition-all active:scale-[0.98]"
-            >
-              <Camera className="w-4 h-4 shrink-0" />
-              <span>Photo Quote</span>
+              <Logo variant="horizontal" />
             </Link>
-          </div>
 
-          {/* Mobile menu button */}
-          <div className="flex md:hidden items-center gap-2">
-            <Link
-              to="/quote"
-              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-bold bg-brand-amber text-white rounded-lg shadow-sm"
-            >
-              <Camera className="w-3.5 h-3.5" />
-              Quote
-            </Link>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-amber"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Dropdown Drawer */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top duration-200">
-            <div className="grid grid-cols-2 gap-2 pt-1 pb-2">
-              <a
-                href={`tel:${BUSINESS_INFO.phoneRaw}`}
-                className="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-sm text-center"
-              >
-                <Phone className="w-3.5 h-3.5 fill-current" />
-                Call: {BUSINESS_INFO.phone}
-              </a>
-              <a
-                href={`sms:${BUSINESS_INFO.phoneRaw}?&body=${encodeURIComponent(BUSINESS_INFO.smsPrompt)}`}
-                className="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-blue-600 text-white font-bold text-xs rounded-xl shadow-sm text-center"
-              >
-                <MessageSquare className="w-3.5 h-3.5 fill-current" />
-                Text: {BUSINESS_INFO.phone}
-              </a>
-            </div>
-
-            <div className="space-y-1">
+            {/* Desktop Navigation Links (Centered, Visible on XL and larger) */}
+            <div className="hidden xl:flex items-center space-x-1">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
                   to={link.path}
                   className={({ isActive }) =>
-                    `block px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                    `px-3 py-2 text-xs 2xl:text-sm font-bold rounded-xl transition-all duration-150 flex items-center gap-1.5 ${
                       isActive
-                        ? 'text-brand-amber bg-amber-50 font-bold'
-                        : 'text-slate-800 hover:bg-slate-50'
+                        ? 'text-brand-amber bg-amber-50/90 shadow-sm font-extrabold'
+                        : link.highlight
+                        ? 'text-brand-navy bg-slate-100 hover:bg-amber-100/60 hover:text-brand-amber font-extrabold'
+                        : 'text-slate-700 hover:text-brand-navy hover:bg-slate-100/70'
                     }`
                   }
                 >
-                  {link.name}
+                  <span>{link.name}</span>
                 </NavLink>
               ))}
             </div>
 
-            <div className="pt-2 border-t border-slate-100">
-              <div className="text-xs text-slate-500 flex items-center gap-1.5 mb-2">
-                <MapPin className="w-3.5 h-3.5 text-brand-amber" />
-                <span>Fuquay-Varina, NC &amp; Surrounding Areas</span>
-              </div>
-              <p className="text-[11px] text-slate-400">
-                Word-of-mouth neighbor trusted • 1-Year Craftsmanship Guarantee
-              </p>
+            {/* Desktop CTAs (Visible on LG and larger) */}
+            <div className="hidden lg:flex items-center gap-2 xl:gap-2.5 shrink-0">
+              
+              {/* Primary CTA: Call Now */}
+              <a
+                href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs xl:text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm hover:shadow transition-all active:scale-[0.98]"
+                title={`Call ${BUSINESS_INFO.name}`}
+              >
+                <Phone className="w-3.5 h-3.5 fill-current shrink-0" />
+                <span className="whitespace-nowrap">Call: {BUSINESS_INFO.phone}</span>
+              </a>
+
+              {/* Secondary CTA: Text Now */}
+              <a
+                href={`sms:${BUSINESS_INFO.phoneRaw}?&body=${encodeURIComponent(BUSINESS_INFO.smsPrompt)}`}
+                className="hidden xl:inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs xl:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow transition-all active:scale-[0.98]"
+                title={`Text ${BUSINESS_INFO.name}`}
+              >
+                <MessageSquare className="w-3.5 h-3.5 fill-current shrink-0" />
+                <span className="whitespace-nowrap">Text: {BUSINESS_INFO.phone}</span>
+              </a>
+
+              {/* Quote CTA Button */}
+              <Link
+                to="/quote"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs xl:text-sm font-extrabold bg-brand-amber hover:bg-brand-amber-hover text-white shadow-cta hover:shadow-lg transition-all active:scale-[0.98]"
+              >
+                <Camera className="w-4 h-4 shrink-0" />
+                <span className="whitespace-nowrap">Photo Quote</span>
+              </Link>
             </div>
+
+            {/* Tablet & Mobile Right Action Cluster */}
+            <div className="flex xl:hidden items-center gap-2">
+              
+              {/* Call button on mobile / tablet */}
+              <a
+                href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                className="hidden sm:inline-flex lg:hidden items-center gap-1.5 px-3 py-2 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-sm"
+              >
+                <Phone className="w-3.5 h-3.5 fill-current" />
+                <span>Call</span>
+              </a>
+
+              {/* Quick Quote Button */}
+              <Link
+                to="/quote"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-extrabold bg-brand-amber text-white rounded-xl shadow-sm hover:bg-brand-amber-hover transition-colors"
+              >
+                <Camera className="w-3.5 h-3.5 shrink-0" />
+                <span>Quote</span>
+              </Link>
+
+              {/* Hamburger Button */}
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2.5 rounded-xl text-slate-800 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-amber border border-slate-200 transition-colors"
+                aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6 text-brand-navy" /> : <Menu className="w-6 h-6 text-brand-navy" />}
+              </button>
+
+            </div>
+
+          </div>
+        </div>
+
+        {/* 3. MOBILE & TABLET SLIDE-OVER DRAWER */}
+        {mobileMenuOpen && (
+          <div className="xl:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl px-4 sm:px-6 pt-4 pb-8 space-y-4 shadow-2xl animate-in slide-in-from-top duration-200">
+            
+            {/* Quick Action Top Cards (Call & Text) */}
+            <div className="grid grid-cols-2 gap-2.5 pt-1">
+              <a
+                href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                className="flex items-center justify-center gap-2 py-3 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition-all"
+              >
+                <Phone className="w-4 h-4 fill-current shrink-0" />
+                <span className="truncate">Call: {BUSINESS_INFO.phone}</span>
+              </a>
+              <a
+                href={`sms:${BUSINESS_INFO.phoneRaw}?&body=${encodeURIComponent(BUSINESS_INFO.smsPrompt)}`}
+                className="flex items-center justify-center gap-2 py-3 px-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition-all"
+              >
+                <MessageSquare className="w-4 h-4 fill-current shrink-0" />
+                <span className="truncate">Text: {BUSINESS_INFO.phone}</span>
+              </a>
+            </div>
+
+            {/* Nav Links with Icons */}
+            <div className="space-y-1 pt-2">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <NavLink
+                    key={link.path}
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+                        isActive
+                          ? 'text-brand-amber bg-amber-50 font-extrabold border-l-4 border-brand-amber'
+                          : link.highlight
+                          ? 'text-brand-navy bg-slate-100 hover:bg-slate-200'
+                          : 'text-slate-800 hover:bg-slate-50'
+                      }`
+                    }
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon className={`w-4 h-4 ${link.highlight ? 'text-brand-amber' : 'text-slate-500'}`} />
+                      <span>{link.name}</span>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </NavLink>
+                );
+              })}
+            </div>
+
+            {/* Bottom Info Banner */}
+            <div className="pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
+              <div className="flex items-center gap-2 text-slate-700 font-medium">
+                <MapPin className="w-4 h-4 text-brand-amber shrink-0" />
+                <span>Fuquay-Varina, NC (Serving South Wake County)</span>
+              </div>
+              <div className="flex items-center gap-2 text-emerald-700 font-semibold">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>1-Year Craftsmanship Guarantee on All Labor</span>
+              </div>
+            </div>
+
           </div>
         )}
+
       </nav>
     </header>
   );

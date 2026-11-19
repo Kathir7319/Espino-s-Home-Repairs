@@ -192,7 +192,7 @@ export default function HomePage() {
           ))}
 
           {/* 6th Card: Custom Punch List Package Card */}
-          <div className="bg-gradient-to-br from-brand-navy to-brand-navy-light text-white rounded-2xl p-6 shadow-card flex flex-col justify-between">
+          <div className="bg-gradient-to-br from-brand-navy to-brand-navy-light text-white rounded-2xl p-6 shadow-card flex flex-col justify-between h-full">
             <div>
               <div className="w-12 h-12 rounded-xl bg-white/10 text-brand-amber flex items-center justify-center mb-4">
                 <Sparkles className="w-6 h-6" />
@@ -265,7 +265,7 @@ export default function HomePage() {
             {PRICING_RATES.map((pkg) => (
               <div
                 key={pkg.id}
-                className={`rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 relative ${
+                className={`rounded-3xl p-8 flex flex-col justify-between h-full transition-all duration-300 relative ${
                   pkg.popular
                     ? 'bg-white border-2 border-brand-amber shadow-xl scale-100 md:-translate-y-2'
                     : 'bg-white border border-slate-200 shadow-card'
@@ -407,7 +407,7 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {TESTIMONIALS.map((t, idx) => (
-            <div key={idx} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-card flex flex-col justify-between">
+            <div key={idx} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-card flex flex-col justify-between h-full">
               <div>
                 <div className="flex items-center gap-1 text-amber-500 mb-3">
                   {[...Array(t.rating)].map((_, i) => (

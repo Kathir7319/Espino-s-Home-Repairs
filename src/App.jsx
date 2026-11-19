@@ -22,7 +22,7 @@ export default function App() {
       <Navbar />
 
       {/* Main Multi-Page Content */}
-      <main className="flex-1">
+      <main className="flex-1 pb-16 md:pb-0">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
