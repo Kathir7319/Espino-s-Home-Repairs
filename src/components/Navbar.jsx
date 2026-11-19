@@ -114,14 +114,14 @@ export default function Navbar() {
               <Logo variant="horizontal" />
             </Link>
 
-            {/* Desktop Navigation Links (Centered, single-line, fits comfortably inside container) */}
-            <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+            {/* Desktop Navigation Links (Centered, single-line, visible on XL and above) */}
+            <div className="hidden xl:flex items-center space-x-1 2xl:space-x-2">
               {desktopNavLinks.map((link) => (
                 <NavLink
                   key={link.path}
                   to={link.path}
                   className={({ isActive }) =>
-                    `px-3 py-2 text-xs xl:text-sm font-semibold rounded-xl whitespace-nowrap transition-all duration-150 ${
+                    `px-3 py-2 text-xs 2xl:text-sm font-semibold rounded-xl whitespace-nowrap transition-all duration-150 ${
                       isActive
                         ? 'text-brand-amber bg-amber-50 font-bold shadow-sm'
                         : 'text-slate-700 hover:text-brand-navy hover:bg-slate-100'
@@ -133,13 +133,13 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Desktop CTAs (Call, Text Us, Photo Quote - Fits perfectly within max-w-7xl container) */}
-            <div className="hidden lg:flex items-center gap-2 xl:gap-2.5 shrink-0">
+            {/* Desktop CTAs (Call, Text Us, Photo Quote - visible on XL and above) */}
+            <div className="hidden xl:flex items-center gap-2 2xl:gap-2.5 shrink-0">
               
               {/* Primary CTA: Call Now */}
               <a
                 href={`tel:${BUSINESS_INFO.phoneRaw}`}
-                className="h-10 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs xl:text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm hover:shadow transition-all whitespace-nowrap active:scale-[0.98]"
+                className="h-10 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs 2xl:text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm hover:shadow transition-all whitespace-nowrap active:scale-[0.98]"
                 title={`Call ${BUSINESS_INFO.name}`}
               >
                 <Phone className="w-3.5 h-3.5 fill-current shrink-0" />
@@ -149,39 +149,40 @@ export default function Navbar() {
               {/* Secondary CTA: Text Us */}
               <a
                 href={`sms:${BUSINESS_INFO.phoneRaw}?&body=${encodeURIComponent(BUSINESS_INFO.smsPrompt)}`}
-                className="h-10 hidden xl:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow transition-all whitespace-nowrap active:scale-[0.98]"
+                className="h-10 hidden 2xl:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow transition-all whitespace-nowrap active:scale-[0.98]"
                 title={`Text ${BUSINESS_INFO.name}`}
               >
                 <MessageSquare className="w-3.5 h-3.5 fill-current shrink-0" />
                 <span>Text Us</span>
               </a>
 
-              {/* Action Button: Photo Quote (Aligned with right page margin) */}
+              {/* Action Button: Photo Quote */}
               <Link
                 to="/quote"
-                className="h-10 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs xl:text-sm font-extrabold bg-brand-amber hover:bg-brand-amber-hover text-white shadow-cta hover:shadow-lg transition-all whitespace-nowrap active:scale-[0.98]"
+                className="h-10 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs 2xl:text-sm font-extrabold bg-brand-amber hover:bg-brand-amber-hover text-white shadow-cta hover:shadow-lg transition-all whitespace-nowrap active:scale-[0.98]"
               >
                 <Camera className="w-4 h-4 shrink-0" />
                 <span>Photo Quote</span>
               </Link>
             </div>
 
-            {/* Tablet & Mobile Right Action Cluster */}
-            <div className="flex lg:hidden items-center gap-2">
+            {/* Tablet & Mobile Right Action Cluster (Visible on screens < XL, e.g. 1024px tablet/laptop) */}
+            <div className="flex xl:hidden items-center gap-2">
               
-              {/* Call button on mobile / tablet */}
+              {/* Call button on tablet/mobile */}
               <a
                 href={`tel:${BUSINESS_INFO.phoneRaw}`}
-                className="h-9 hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-sm whitespace-nowrap"
+                className="h-9 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-sm whitespace-nowrap active:scale-[0.98]"
               >
                 <Phone className="w-3.5 h-3.5 fill-current" />
-                <span>Call</span>
+                <span className="hidden sm:inline">Call: {BUSINESS_INFO.phone}</span>
+                <span className="sm:hidden">Call</span>
               </a>
 
               {/* Quick Quote Button */}
               <Link
                 to="/quote"
-                className="h-9 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-extrabold bg-brand-amber text-white rounded-xl shadow-sm hover:bg-brand-amber-hover transition-colors whitespace-nowrap"
+                className="h-9 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-extrabold bg-brand-amber text-white rounded-xl shadow-sm hover:bg-brand-amber-hover transition-colors whitespace-nowrap active:scale-[0.98]"
               >
                 <Camera className="w-3.5 h-3.5 shrink-0" />
                 <span>Quote</span>
@@ -205,7 +206,7 @@ export default function Navbar() {
 
         {/* 3. MOBILE & TABLET SLIDE-OVER DRAWER */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl px-4 sm:px-6 pt-4 pb-8 space-y-4 shadow-2xl animate-in slide-in-from-top duration-200">
+          <div className="xl:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl px-4 sm:px-6 pt-4 pb-8 space-y-4 shadow-2xl animate-in slide-in-from-top duration-200">
             
             {/* Quick Action Top Cards (Call & Text per spec) */}
             <div className="grid grid-cols-2 gap-2.5 pt-1">
