@@ -38,14 +38,25 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
+  // Clean, single-line navigation links without duplicates
+  const desktopNavLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'Pricing & Rates', path: '/pricing' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+  ];
+
+  // Mobile drawer links (including direct Photo Quote page link)
+  const mobileNavLinks = [
     { name: 'Home', path: '/', icon: Home },
     { name: 'Services', path: '/services', icon: Wrench },
-    { name: 'Rates & Packages', path: '/pricing', icon: DollarSign },
-    { name: 'Photo Quote', path: '/quote', icon: Camera, highlight: true },
-    { name: 'Before & After', path: '/gallery', icon: Sparkles },
-    { name: 'Our Story', path: '/about', icon: Users },
-    { name: 'Contact', path: '/contact', icon: Phone },
+    { name: 'Pricing & Rates', path: '/pricing', icon: DollarSign },
+    { name: 'Request Photo Quote', path: '/quote', icon: Camera, highlight: true },
+    { name: 'Before & After Gallery', path: '/gallery', icon: Sparkles },
+    { name: 'About Our Craftsmen', path: '/about', icon: Users },
+    { name: 'Contact & Service Area', path: '/contact', icon: Phone },
   ];
 
   return (
@@ -57,18 +68,18 @@ export default function Navbar() {
           
           {/* Left: Location & Local Trust */}
           <div className="flex items-center gap-2 truncate">
-            <span className="flex items-center gap-1.5 text-brand-amber font-semibold text-[11px] sm:text-xs">
+            <span className="flex items-center gap-1.5 text-brand-amber font-semibold text-[11px] sm:text-xs whitespace-nowrap">
               <MapPin className="w-3.5 h-3.5 text-brand-amber shrink-0" />
               <span>Fuquay-Varina &amp; South Wake County, NC</span>
             </span>
             <span className="hidden md:inline text-slate-600">•</span>
-            <span className="hidden md:inline text-slate-300 text-xs">
+            <span className="hidden md:inline text-slate-300 text-xs whitespace-nowrap">
               Direct Neighbor Referrals &amp; Upfront Pricing
             </span>
           </div>
 
           {/* Right: Guarantee & Hours */}
-          <div className="flex items-center gap-4 text-[11px] sm:text-xs shrink-0">
+          <div className="flex items-center gap-4 text-[11px] sm:text-xs shrink-0 whitespace-nowrap">
             <span className="hidden lg:flex items-center gap-1.5 text-slate-300">
               <Clock className="w-3.5 h-3.5 text-slate-400" />
               <span>Mon–Sat: 7:30 AM – 6:00 PM</span>
@@ -91,7 +102,7 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-3 lg:gap-6">
             
             {/* Logo */}
             <Link 
@@ -102,57 +113,55 @@ export default function Navbar() {
               <Logo variant="horizontal" />
             </Link>
 
-            {/* Desktop Navigation Links (Centered, Visible on XL and larger) */}
-            <div className="hidden xl:flex items-center space-x-1">
-              {navLinks.map((link) => (
+            {/* Desktop Navigation Links (Clean, 100% Single Line, Never Wraps) */}
+            <div className="hidden xl:flex items-center space-x-1 2xl:space-x-2">
+              {desktopNavLinks.map((link) => (
                 <NavLink
                   key={link.path}
                   to={link.path}
                   className={({ isActive }) =>
-                    `px-3 py-2 text-xs 2xl:text-sm font-bold rounded-xl transition-all duration-150 flex items-center gap-1.5 ${
+                    `px-3 py-2 text-xs 2xl:text-sm font-semibold rounded-xl whitespace-nowrap transition-all duration-150 ${
                       isActive
-                        ? 'text-brand-amber bg-amber-50/90 shadow-sm font-extrabold'
-                        : link.highlight
-                        ? 'text-brand-navy bg-slate-100 hover:bg-amber-100/60 hover:text-brand-amber font-extrabold'
-                        : 'text-slate-700 hover:text-brand-navy hover:bg-slate-100/70'
+                        ? 'text-brand-amber bg-amber-50/90 font-bold shadow-sm'
+                        : 'text-slate-700 hover:text-brand-navy hover:bg-slate-100/80'
                     }`
                   }
                 >
-                  <span>{link.name}</span>
+                  {link.name}
                 </NavLink>
               ))}
             </div>
 
-            {/* Desktop CTAs (Visible on LG and larger) */}
+            {/* Desktop CTAs (Call, Text, Photo Quote - Uniform Height & Perfectly Aligned) */}
             <div className="hidden lg:flex items-center gap-2 xl:gap-2.5 shrink-0">
               
-              {/* Primary CTA: Call Now */}
+              {/* Primary CTA: Call Now (Green Button per spec) */}
               <a
                 href={`tel:${BUSINESS_INFO.phoneRaw}`}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs xl:text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm hover:shadow transition-all active:scale-[0.98]"
+                className="h-10 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs xl:text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm hover:shadow transition-all whitespace-nowrap active:scale-[0.98]"
                 title={`Call ${BUSINESS_INFO.name}`}
               >
                 <Phone className="w-3.5 h-3.5 fill-current shrink-0" />
-                <span className="whitespace-nowrap">Call: {BUSINESS_INFO.phone}</span>
+                <span>Call: {BUSINESS_INFO.phone}</span>
               </a>
 
-              {/* Secondary CTA: Text Now */}
+              {/* Secondary CTA: Text Now (Blue Button per spec) */}
               <a
                 href={`sms:${BUSINESS_INFO.phoneRaw}?&body=${encodeURIComponent(BUSINESS_INFO.smsPrompt)}`}
-                className="hidden xl:inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs xl:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow transition-all active:scale-[0.98]"
+                className="h-10 hidden xl:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs xl:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow transition-all whitespace-nowrap active:scale-[0.98]"
                 title={`Text ${BUSINESS_INFO.name}`}
               >
                 <MessageSquare className="w-3.5 h-3.5 fill-current shrink-0" />
-                <span className="whitespace-nowrap">Text: {BUSINESS_INFO.phone}</span>
+                <span>Text: {BUSINESS_INFO.phone}</span>
               </a>
 
-              {/* Quote CTA Button */}
+              {/* Action Button: Photo Quote (Amber Button) */}
               <Link
                 to="/quote"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs xl:text-sm font-extrabold bg-brand-amber hover:bg-brand-amber-hover text-white shadow-cta hover:shadow-lg transition-all active:scale-[0.98]"
+                className="h-10 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs xl:text-sm font-extrabold bg-brand-amber hover:bg-brand-amber-hover text-white shadow-cta hover:shadow-lg transition-all whitespace-nowrap active:scale-[0.98]"
               >
                 <Camera className="w-4 h-4 shrink-0" />
-                <span className="whitespace-nowrap">Photo Quote</span>
+                <span>Photo Quote</span>
               </Link>
             </div>
 
@@ -162,7 +171,7 @@ export default function Navbar() {
               {/* Call button on mobile / tablet */}
               <a
                 href={`tel:${BUSINESS_INFO.phoneRaw}`}
-                className="hidden sm:inline-flex lg:hidden items-center gap-1.5 px-3 py-2 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-sm"
+                className="h-9 hidden sm:inline-flex lg:hidden items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-sm whitespace-nowrap"
               >
                 <Phone className="w-3.5 h-3.5 fill-current" />
                 <span>Call</span>
@@ -171,7 +180,7 @@ export default function Navbar() {
               {/* Quick Quote Button */}
               <Link
                 to="/quote"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-extrabold bg-brand-amber text-white rounded-xl shadow-sm hover:bg-brand-amber-hover transition-colors"
+                className="h-9 inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-extrabold bg-brand-amber text-white rounded-xl shadow-sm hover:bg-brand-amber-hover transition-colors whitespace-nowrap"
               >
                 <Camera className="w-3.5 h-3.5 shrink-0" />
                 <span>Quote</span>
@@ -181,11 +190,11 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-xl text-slate-800 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-amber border border-slate-200 transition-colors"
+                className="h-9 w-9 flex items-center justify-center rounded-xl text-slate-800 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-amber border border-slate-200 transition-colors"
                 aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
                 aria-expanded={mobileMenuOpen}
               >
-                {mobileMenuOpen ? <X className="w-6 h-6 text-brand-navy" /> : <Menu className="w-6 h-6 text-brand-navy" />}
+                {mobileMenuOpen ? <X className="w-5 h-5 text-brand-navy" /> : <Menu className="w-5 h-5 text-brand-navy" />}
               </button>
 
             </div>
@@ -197,18 +206,18 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <div className="xl:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl px-4 sm:px-6 pt-4 pb-8 space-y-4 shadow-2xl animate-in slide-in-from-top duration-200">
             
-            {/* Quick Action Top Cards (Call & Text) */}
+            {/* Quick Action Top Cards (Call & Text per spec) */}
             <div className="grid grid-cols-2 gap-2.5 pt-1">
               <a
                 href={`tel:${BUSINESS_INFO.phoneRaw}`}
-                className="flex items-center justify-center gap-2 py-3 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition-all"
+                className="flex items-center justify-center gap-2 py-3 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition-all whitespace-nowrap"
               >
                 <Phone className="w-4 h-4 fill-current shrink-0" />
                 <span className="truncate">Call: {BUSINESS_INFO.phone}</span>
               </a>
               <a
                 href={`sms:${BUSINESS_INFO.phoneRaw}?&body=${encodeURIComponent(BUSINESS_INFO.smsPrompt)}`}
-                className="flex items-center justify-center gap-2 py-3 px-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition-all"
+                className="flex items-center justify-center gap-2 py-3 px-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition-all whitespace-nowrap"
               >
                 <MessageSquare className="w-4 h-4 fill-current shrink-0" />
                 <span className="truncate">Text: {BUSINESS_INFO.phone}</span>
@@ -217,18 +226,18 @@ export default function Navbar() {
 
             {/* Nav Links with Icons */}
             <div className="space-y-1 pt-2">
-              {navLinks.map((link) => {
+              {mobileNavLinks.map((link) => {
                 const Icon = link.icon;
                 return (
                   <NavLink
                     key={link.path}
                     to={link.path}
                     className={({ isActive }) =>
-                      `flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+                      `flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
                         isActive
                           ? 'text-brand-amber bg-amber-50 font-extrabold border-l-4 border-brand-amber'
                           : link.highlight
-                          ? 'text-brand-navy bg-slate-100 hover:bg-slate-200'
+                          ? 'text-brand-navy bg-amber-50/60 hover:bg-amber-100 text-brand-amber font-extrabold'
                           : 'text-slate-800 hover:bg-slate-50'
                       }`
                     }
